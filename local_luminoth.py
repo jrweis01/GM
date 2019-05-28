@@ -46,7 +46,9 @@ class Perception:
         timestamp = str(datetime.datetime.now()).replace(':', '_').replace(' ', '_')
         image_output_name = image_name.replace("." + image_ext, "_" + self.checkpoint + "_" +
                                                timestamp + "." + image_ext)
-
+        # If directory does not exist create it
+        if not os.path.isdir('.\\results'):
+            os.mkdir('.\\results', mode=0o777)
         vis_objects(image, objects).save(os.path.join('.\\results', image_output_name))
 
 
