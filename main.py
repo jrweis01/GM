@@ -12,6 +12,10 @@ import os
 @click.option('--save', '-s', default=False, help='Save the image with bounding boxes or not')
 @click.option('--images', '-i', multiple=True, default=[], help='list of full paths to images that should be processed')
 def main(checkpoint, save, images):
+    """This module requires at least one image (-i) in the comand line.
+    The module can handle many images in the same run.
+    Optional parameters include Checkpoint name (default is safe) Save will
+    determine if the image should be saved along with the object bounding boxes."""
     number_of_passed_tests = 0
     number_of_failed_test = 0
     threshold = 1000  # in milliseconds
