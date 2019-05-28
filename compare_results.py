@@ -2,7 +2,8 @@ import datetime
 
 
 class CompareDetections:
-    def __init__(self, results, baseline):
+    def __init__(self, image_name, results, baseline):
+        self.image_name = image_name
         self.results = results
         self.baseline = baseline
 
@@ -10,12 +11,13 @@ class CompareDetections:
         # print("comparing results to baseline while taking into account acceptable threshold")
         return True
 
-    def evaluate_processing_time(self, processing_time,baseline_time, threshold):
+    def evaluate_processing_time(self, processing_time, baseline_time, threshold):
         delta = self.__subtract_time_stamps(processing_time, baseline_time) - threshold
         return True if delta <= 0 else False
 
     def evaluate_num_found_objects(self):
-        return True if len(self.results) - len(self.baseline["objects"]) == 0 else False
+        return True if len(self.results) - \
+                       len(self.baseline[self.image_name]["objects"]) == 0 else False
 
     def __subtract_time_stamps(self, time1, time2):
         ms_time1 = self.__timestamp_to_milliseconds(time1)

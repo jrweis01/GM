@@ -1,6 +1,6 @@
 latest_results = {
   "bicycling-1160860_960_720.jpg": {
-  "detection_time": '0:00:04.0',
+  "detection_time": '0:01:40.558',
   "objects": [
     {
       "bbox": [

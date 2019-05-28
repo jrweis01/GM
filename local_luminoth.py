@@ -13,18 +13,16 @@ class Perception:
         """ Detects objects in image and returns list of objects detected.
             Measures the amount of time taken to analyze an image (regardless of the accuracy of the detection)"""
         perception_results = {}
+        # If no checkpoint specified, will assume `accurate` by default. In this case,
+        # we want to use our traffic checkpoint. The Detector can also take a config
+        # object.
+        detector = Detector(self.checkpoint)
         for full_image_path in self.list_of_images:
             if os.path.exists(full_image_path):
                 image_path, image_name = os.path.split(full_image_path)
                 image_ext = image_name.split('.')[-1]
                 image = read_image(full_image_path)
                 perception_results.update({image_name: {}})
-
-                # If no checkpoint specified, will assume `accurate` by default. In this case,
-                # we want to use our traffic checkpoint. The Detector can also take a config
-                # object.
-                detector = Detector(self.checkpoint)
-
                 # Returns a dictionary with the detections.
                 start_time = datetime.datetime.now()
                 objects = detector.predict(image)

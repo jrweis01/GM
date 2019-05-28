@@ -15,26 +15,26 @@ def main(checkpoint, save, images):
     number_of_passed_tests = 0
     number_of_failed_test = 0
     threshold = 1000  # in milliseconds
-
+    #  results = {}
     if len(images) > 0:
         my_luminoth = Perception(images, save, checkpoint)
         objects = my_luminoth.run()
 
         for image in images:
             image_path, image_name = os.path.split(image)
-            objects.update({image_name + "_Pass": True})
-            comparision = CompareDetections(objects[image_name]["objects"], DB.latest_results)
+            objects[image_name].update({"Pass": True})
+            comparision = CompareDetections(image_name, objects[image_name]["objects"], DB.latest_results)
             accuracy_of_detections = comparision.compare_objects_to_baselines()
             number_of_detections = comparision.evaluate_num_found_objects()
             processing_time = comparision.evaluate_processing_time(objects[image_name]["detection_time"],
                                                   DB.latest_results[image_name]["detection_time"],
                                                   threshold)
             #  TODO: This should be written to a DB of results
-            objects[image_name + "_Pass"] = False if not processing_time or \
+            objects[image_name]["Pass"] = False if not processing_time or \
                                                      not number_of_detections or \
                                                      not accuracy_of_detections else \
-                objects[image_name + "_Pass"]
-            if objects[image_name + "_Pass"]:
+                objects[image_name]["Pass"]
+            if objects[image_name]["Pass"]:
                 number_of_passed_tests += 1
             else:
                 number_of_failed_test += 1
