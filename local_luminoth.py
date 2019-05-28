@@ -49,7 +49,7 @@ class Perception:
         image_output_name = image_name.replace("." + image_ext, "_" + self.checkpoint + "_" +
                                                timestamp + "." + image_ext)
 
-        vis_objects(image, objects).save(os.path.join('.//images//results', image_output_name))
+        vis_objects(image, objects).save(os.path.join('.\\results', image_output_name))
 
 
 
