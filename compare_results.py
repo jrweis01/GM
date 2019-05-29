@@ -7,7 +7,7 @@ class CompareDetections:
         self.results = results
         self.baseline = baseline
 
-    def compare_objects_to_baselines(self):
+    def evaluate_objects_comparison(self):
         # print("comparing results to baseline while taking into account acceptable threshold")
         # TODO: parse the objects of each image into groups of object types.
         # TODO: loop through each type of object and see if the results has a \
@@ -35,7 +35,7 @@ class CompareDetections:
         return int(ms[:3]) + (int(sec) * 1000) + (int(split_time_stamp[-2]) * 60000) + \
                (int(split_time_stamp[-3]) * 3600000)
 
-    def split_objects_by_lables(self, objects):
+    def __split_objects_by_lables(self, objects):
         car_objects = []
         bus_objects = []
         truck_objects = []

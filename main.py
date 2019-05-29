@@ -33,7 +33,7 @@ def main(mode, checkpoint, save, images):
                 image_path, image_name = os.path.split(image)
                 objects[image_name].update({"Pass": True})
                 comparision = CompareDetections(image_name, objects[image_name]["objects"], DB.baseline_results)
-                accuracy_of_detections = comparision.compare_objects_to_baselines()
+                accuracy_of_detections = comparision.evaluate_objects_comparison()
                 number_of_detections = comparision.evaluate_num_found_objects()
                 processing_time = comparision.evaluate_processing_time(objects[image_name]["detection_time"],
                                                       DB.baseline_results[image_name]["detection_time"],
@@ -51,9 +51,7 @@ def main(mode, checkpoint, save, images):
                           % (image_name, "passed" if number_of_detections else "failed",
                              "passed" if processing_time else "failed",
                              "passed" if accuracy_of_detections else "failed"))
-                number_of_tests_run = number_of_passed_tests + number_of_failed_test
-
-                # print(sorted_objects)
+            number_of_tests_run = number_of_passed_tests + number_of_failed_test
             print("%d Tests run;  %d PASSED, %d FAILED" %
                   (number_of_tests_run, number_of_passed_tests, number_of_failed_test))
     else:
