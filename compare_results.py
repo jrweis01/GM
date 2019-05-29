@@ -9,6 +9,9 @@ class CompareDetections:
 
     def compare_objects_to_baselines(self):
         # print("comparing results to baseline while taking into account acceptable threshold")
+        # TODO: parse the objects of each image into groups of object types.
+        # TODO: loop through each type of object and see if the results has a \
+        #  bounding box of that type within the given threshold.
         return True
 
     def evaluate_processing_time(self, processing_time, baseline_time, threshold):
