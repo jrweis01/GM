@@ -51,6 +51,7 @@ def main(mode, checkpoint, save, images):
                           % (image_name, "passed" if number_of_detections else "failed",
                              "passed" if processing_time else "failed",
                              "passed" if accuracy_of_detections else "failed"))
+                del comparision
             number_of_tests_run = number_of_passed_tests + number_of_failed_test
             print("%d Tests run;  %d PASSED, %d FAILED" %
                   (number_of_tests_run, number_of_passed_tests, number_of_failed_test))
