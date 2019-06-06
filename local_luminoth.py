@@ -35,6 +35,7 @@ class Perception:
                     self.save_image_and_objects(image, image_name, image_ext, objects)
             else:
                 print("ERROR: image not found: %s" % full_image_path)
+        del detector
         return perception_results
 
     def save_image_and_objects(self, image, image_name, image_ext, objects):
